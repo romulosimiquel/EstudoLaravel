@@ -22,9 +22,11 @@ class ServicoController extends Controller
      */
     public function index()
     {   
+        $title = 'NANIIIII';
+
         $servicos = $this->servico->all();
 
-        return view('painel.servicos.index', compact('servicos'));
+        return view('painel.servicos.index', compact('servicos', 'title'));
 
 
         // $teste  = 123;
@@ -102,20 +104,21 @@ class ServicoController extends Controller
     public function tests()
     {
 
+        /*PARADA DO UPDATE, É PA DA UPDATE, POREEEM É COM ID
+        $serv = $this->servico->find(6);
+        $update = $serv->update([
+                        'name'     => 'Caia pedra no chão, do update',
+                        'processo' => 9635,
+                        'category' => 'cópia',
+                        'descricao'=> 'Isso é só teste só mesmo, do update também' 
+        ]);
 
-        // $serv = $this->servico->find(6);
-        // $update = $serv->update([
-        //                 'name'     => 'Caia pedra no chão, do update',
-        //                 'processo' => 9635,
-        //                 'category' => 'cópia',
-        //                 'descricao'=> 'Isso é só teste só mesmo, do update também' 
-        // ]);
+        if( $update )
+            return 'Altered beast com sucesso';
+        else 
+            return 'Não deu';
 
-        // if( $update )
-        //     return 'Altered beast com sucesso';
-        // else 
-        //     return 'Não deu';
-
+        UPDATE COM WHERE, AQUI PODE SER COM WHERE DE TUDO, NOME, EMAIL, MAE, VÓ, PLANO DENTÁRIO
         $serv = $this->servico->where('processo', 3625);
         $update = $serv->update([
                         'name'     => 'Pirapora bahia agora',
@@ -129,9 +132,10 @@ class ServicoController extends Controller
         else 
             return 'Não deu';
 
-       /* $serv = $this->servico->find(5);
+        UPDATE UM POR UM, POR ID TAMBÉM
+        $serv = $this->servico->find(5);
 
-        dd($serv); debug do laravel, muito bom, recomendo, 5 estrelas
+        dd($serv); DEBUG DO LARAVEL, BOM PA CARAI
         $serv->name = 'Protocolo do chiclete ploc';
         $serv->processo = 3625;
         $serv->category = 'protocolo';
@@ -141,10 +145,10 @@ class ServicoController extends Controller
         if( $update )
             return 'Altered beast com sucesso';
         else 
-            return 'Não deu';*/
+            return 'Não deu';
 
-
-        /* $insert = $this->servico->create([
+        INSERT PELO CREATE, É O MELHOR SÓ QUE TEM QUE SETAR O QUE PODE PASSAR PRO BANCO, ATRAVÉS DO $FILLABLE E DO $GUARDED
+         $insert = $this->servico->create([
             'name'     => 'Cópia da cópia copiada da copiadora',
             'processo' => 999,
             'category' => 'cópia',
@@ -157,7 +161,7 @@ class ServicoController extends Controller
             return 'Falha no engano';
 
 
-
+        INSERT TAMBÉM PORÉM TEM QUE FAZER UM POR UM
         $serv = $this->servico;
         $serv->name = 'Protocolo disso aqui';
         $serv->processo = 2444;
@@ -171,6 +175,13 @@ class ServicoController extends Controller
             return 'Inserido com sucesso';
         else
             return 'Falha no engano'; */
+
+        $delete = $this->servico->find(7)->where('processo', 7895)->delete();
+
+        if( $delete )
+            return "ID {{$delete->id}} deletado com sucesso";
+        else
+            return 'Falha no engano';
 
     }
 }
